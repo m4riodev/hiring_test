@@ -7,7 +7,7 @@ import { useSpring, animated } from "@react-spring/web";
 import background from "../assets/images/mode1.gif";
 import bgMusic from "../assets/audio/memory-bg.mp3";
 import axios from "axios";
-
+import config from "../config";
 
 
 const defaultDifficulty = "Normal";
@@ -42,7 +42,7 @@ const shuffleArray = (array) => {
 };
 const saveGameData = async (gameData) => {
   try {
-    const response = await axios.post("http://localhost:5000/api/memory/save", gameData, {
+    const response = await axios.post(`${config.apiUrl}/api/memory/save`, gameData, {
       headers: { "Content-Type": "application/json" },
     });
 

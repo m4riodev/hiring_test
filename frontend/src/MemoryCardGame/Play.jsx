@@ -7,6 +7,7 @@ import backgroundMusic from "../assets/audio/background-music.mp3";
 import buttonHoverSound from "../assets/audio/button-hover.mp3";
 import buttonClickSound from "../assets/audio/button-click.mp3";
 import { X } from "lucide-react";
+import MetaMaskConnect from "../components/MetaMaskConnect";
 import "./Play.css";
 
 const modalStyles = {
@@ -206,6 +207,11 @@ const Play = () => {
     }
   };
 
+  const handleHistory = () => {
+    playClickSound();
+    navigate("/history");
+  };
+
   return (
     <div
       className="background-container"
@@ -227,6 +233,23 @@ const Play = () => {
         </button>
         <button
           className={`game-button ${isCalmMode ? "calm-button" : ""}`}
+          onClick={handleHistory}
+          onMouseEnter={playHoverSound}
+        >
+          History
+        </button>
+        <button
+          className={`game-button ${isCalmMode ? "calm-button" : ""}`}
+          onClick={() => {
+            playClickSound();
+            navigate("/wallet");
+          }}
+          onMouseEnter={playHoverSound}
+        >
+          Wallet
+        </button>
+        <button
+          className={`game-button ${isCalmMode ? "calm-button" : ""}`}
           onClick={() => {
             playClickSound();
             alert("Instructions coming soon!");
@@ -242,6 +265,7 @@ const Play = () => {
         >
           Settings
         </button>
+        
       </div>
       <Modal
         isOpen={SettingsmodalIsOpen}
@@ -252,6 +276,7 @@ const Play = () => {
             ...modalStyles.content,
             backgroundColor: isCalmMode ? "#86a17d" : "#1e1e2e",
             color: isCalmMode ? "#ffffff" : "#fff",
+            height: "400px",
           },
         }}
       >
@@ -300,7 +325,7 @@ const Play = () => {
           />
         </div>
 
-        {/* <div className="calm-mode">
+        <div className="calm-mode">
           <h2 className={`${isCalmMode ? "calm-mode-label" : ""} modal-h2`}>
             Calm Mode
           </h2>
@@ -312,7 +337,7 @@ const Play = () => {
             />
             <span className="slider round"></span>
           </label>
-        </div> */}
+        </div>
       </Modal>
 
       <Modal

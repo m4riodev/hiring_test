@@ -27,3 +27,26 @@ exports.saveGameData = async (req, res) => {
         res.status(500).json({ message: 'Error saving game data', error });
     }
 };
+
+exports.getGameHistory = async (req, res) => {
+    try {
+        const { userID, difficulty, limit = 20, sort = '-gameDate' } = req.query;
+        
+        const filter = {};
+        if (userID) filter.userID = userID;
+        if (difficulty) filter.difficulty = difficulty;
+        
+        const gameHistory = await Save.find(filter)
+            .sort(sort)
+            .limit(parseInt(limit))
+            .populate('userID', 'username');
+        
+        res.status(200).json({
+            count: gameHistory.length,
+            data: gameHistory
+        });
+    } catch (error) {
+        console.error('Erro ao buscar histórico de jogos:', error);
+        res.status(500).json({ message: 'Erro ao buscar histórico de jogos', error: error.message });
+    }
+};

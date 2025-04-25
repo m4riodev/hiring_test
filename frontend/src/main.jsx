@@ -10,7 +10,8 @@ import MemoryCardGame from './MemoryCardGame/MemoryCardGame';
 import Congratulations from "./MemoryCardGame/Congratulation";
 import CongtEasy from "./MemoryCardGame/Congratseasy";
 import CongtNormal from "./MemoryCardGame/Congratsnormal";
-
+import History from "./MemoryCardGame/History";
+import MetaMaskPage from "./MemoryCardGame/MetaMaskPage";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('token'));
@@ -49,7 +50,14 @@ const App = () => {
           path="/play"
           element={isAuthenticated ? <Play /> : <Navigate to="/login" />}
         />
-  
+        <Route
+          path="/history"
+          element={isAuthenticated ? <History /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/wallet"
+          element={isAuthenticated ? <MetaMaskPage /> : <Navigate to="/login" />}
+        />
         <Route
           path="/memory-card-game"
           element={isAuthenticated ? <MemoryCardGame /> : <Navigate to="/login" />}
